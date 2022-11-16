@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 
 frontend:
-  enabled: false
+  enabled: true
   replicaCount: 1
   image:
     repository: martinaif/backstage-k8s-demo-frontend
@@ -90,14 +90,14 @@ postgresql:
 
 appConfig:
   app:
-    baseUrl: https://demo.example.com
+    baseUrl: https://backstage.apps-crc.testing
     title: Backstage
   backend:
-    baseUrl: https://demo.example.com
+    baseUrl: https://backstage.apps-crc.testing
     listen:
       port: 7007
     cors:
-      origin: https://demo.example.com
+      origin: https://backstage.apps-crc.testing
     database:
       client: pg
       connection:
@@ -112,12 +112,12 @@ appConfig:
   sentry:
     organization: example-org-name
   techdocs:
-    storageUrl: https://demo.example.com/api/techdocs/static/docs
-    requestUrl: https://demo.example.com/api/techdocs
+    storageUrl: https://backstage.apps-crc.testing/api/techdocs/static/docs
+    requestUrl: https://backstage.apps-crc.testing/api/techdocs
   lighthouse:
-    baseUrl: https://demo.example.com/lighthouse-api
+    baseUrl: https://backstage.apps-crc.testing/lighthouse-api
   rollbar:
-    organization: example-org-name
+    organization: apps-crc.testing
 
   # Auth config has recently moved into the app config file in upstream Backstage. However,
   # most of this config simply mandates that items like the client id and client secret should
