@@ -87,6 +87,8 @@ postgresql:
   volumePermissions:
     enabled: true
   initdbScriptsSecret: backstage-postgresql-initdb
+  service:
+    port: 5432
 
 appConfig:
   app:

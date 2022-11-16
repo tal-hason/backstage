@@ -1,0 +1,13 @@
+appConfig:
+  app:
+    baseUrl: https://backstage.apps-crc.testing
+    title: Backstage
+  backend:
+    baseUrl: https://backstage.apps-crc.testing
+    cors:
+      origin: https://backstage.apps-crc.testing
+  lighthouse:
+    baseUrl: https://backstage.apps-crc.testing/lighthouse-api
+  techdocs:
+    storageUrl: https://backstage.apps-crc.testing/api/techdocs/static/docs
+    requestUrl: https://backstage.apps-crc.testing/api/techdocs
