@@ -1,0 +1,32 @@
+---
+# Source: backstage/templates/tests/test-postgresql.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: backstage-test-postgres
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: postgresql-client
+      image:  bitnami/postgresql
+      env:
+        - name: PG_HOST
+          value: "backstage-postgresql"
+        - name: PG_PORT
+          value: "5432"
+        - name: PG_USER
+          value: "backend-user"
+        - name: PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: backstage-postgresql
+              key: postgresql-password
+        - name: PG_DBNAME
+          value: backstage_plugin_catalog
+      command:
+        - /bin/bash
+        - -ecx
+        - |
+          psql --host=$PG_HOST --port=$PG_PORT --username=$PG_USER --dbname=$PG_DBNAME --no-password
+  restartPolicy: Never

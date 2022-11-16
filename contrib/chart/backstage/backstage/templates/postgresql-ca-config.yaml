@@ -1,0 +1,33 @@
+---
+# Source: backstage/templates/postgresql-ca-config.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backstage-postgres-ca
+  labels:
+    app: backstage-postgresql
+    release: backstage
+  annotations:
+    "helm.sh/hook": "pre-install"
+    "helm.sh/hook-delete-policy": "before-hook-creation"
+data:
+  ca.crt: |
+    -----BEGIN CERTIFICATE-----
+    MIIDKTCCAhGgAwIBAgIQfQOh/dD4XUyhdjFzmUlLLTANBgkqhkiG9w0BAQsFADAf
+    MR0wGwYDVQQDExRiYWNrc3RhZ2UtcG9zdGdyZXNxbDAeFw0yMjExMTYxNTE2MzVa
+    Fw0yMzExMTYxNTE2MzVaMB8xHTAbBgNVBAMTFGJhY2tzdGFnZS1wb3N0Z3Jlc3Fs
+    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0qMQGN20mXgDrI/7YhJG
+    +87Gzt6CHzJmUNAuMznDJ0EeWxpzqk+SJWb3L3/PE2uKzV9M3gjhZxDNEl1WDn8B
+    nAaajTOsB7V2MXBoB8UOyXFbl7nyuIAT3vN8cyWfwiqfRVI0sFl5f2hM1LFjJ2WN
+    TKGlO/OKoI93K4VK4dEqfFOglil6+na9eFd/XBS3C+xtdqfS6mfaYvyltRlbEW5s
+    wOtiT9NVbOPZOyDai17ln8M3htSz8iCs+wnsuws7yDZ6N/krVNKcDNPzO+Oo1NTM
+    39nyufjsQ3nNex23gXD5Z+0RbcMWDOMZm+c1eI14GPkH9wi3n+TQnxDpBggaRpuz
+    kQIDAQABo2EwXzAOBgNVHQ8BAf8EBAMCAqQwHQYDVR0lBBYwFAYIKwYBBQUHAwEG
+    CCsGAQUFBwMCMA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYEFDzvVuxF949WAC4k
+    OViDDrhPtDY3MA0GCSqGSIb3DQEBCwUAA4IBAQBOI5n3PBtN7lzj6XU2cCs69pZH
+    BD6z63ftGSrAxD2qLp22TOx1+hd0joNI+rStn+qbSIU0zIRJOcQl/VZWQNTFvTeL
+    omtp498YPugUJbfjXOnF04da1ARH/3+gXs4BA0tt8fpmwdk6eARr2gUHpFEZ2Sps
+    H14s9nM/8+i2Ocg9L65rHa32xmsjR/3TAzLUhxmFjUB8yXmemrIwaTxeiA9shfU+
+    1qVdKUxwTjKC8Q+pFpMnMOJyu7bBbjsO7dh7usYKMN0v66lwaPYcKW4QfFDooiDp
+    NzK3Eqwr0944HjlCAXSgUdUOgdfN06v+/ADmvbezWews5rSQk7PwGH3TQgXC
+    -----END CERTIFICATE-----

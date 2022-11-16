@@ -1,0 +1,24 @@
+---
+# Source: backstage/templates/tests/test-app-connection.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: backstage-test-app-connection
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: test-app
+      image: busybox
+      command:
+        - /bin/sh
+        - -ecx
+        - |
+          echo -e "===== Testing the connection with the frontend...\n"
+          wget -q -O - "backstage-frontend.test"
+          echo -e "\n\n===== Testing the connection with the backend...\n"
+          wget -q -O - "http://backstage-backend.test/catalog/entities"
+          echo -e "\n\n===== Testing the connection with the lighthouse plugin...\n"
+          wget -q -O - "backstage-lighthouse.test/v1/audits"
+          echo -e   "\n"
+  restartPolicy: Never

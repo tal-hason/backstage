@@ -1,0 +1,69 @@
+---
+# Source: backstage/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: backstage-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      if ($scheme = https) {
+      add_header  Strict-Transport-Security "max-age=0;";
+      }
+    kubernetes.io/ingress.class: nginx
+spec:
+  tls:
+    - secretName: backstage-tls
+      hosts:
+        - backstage.apps-crc.testing
+        - backstage.apps-crc.testing
+        - backstage.apps-crc.testing
+  rules:
+    - host: backstage.apps-crc.testing
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: backstage-frontend
+                port:
+                  number: 80
+    
+          - path: /api/
+            pathType: Prefix
+            backend:
+              service:
+                name: backstage-backend
+                port:
+                  number: 80
+---
+# Source: backstage/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: backstage-ingress-lighthouse
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      if ($scheme = https) {
+      add_header  Strict-Transport-Security "max-age=0;";
+      }
+    kubernetes.io/ingress.class: nginx
+spec:
+  tls:
+    - secretName: backstage-tls
+      hosts:
+        - backstage.apps-crc.testing
+  rules:
+    - host: backstage.apps-crc.testing
+      http:
+        paths:
+          - path: /lighthouse-api(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: backstage-lighthouse
+                port:
+                  number: 80
